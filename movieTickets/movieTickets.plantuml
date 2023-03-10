@@ -1,0 +1,49 @@
+@startuml
+
+title Movie Tickets \n Sequence Diagram
+
+actor Administrator #red
+actor User #blue
+participant System
+database Movies
+
+User -> System: Search movie by title
+System -> Movies: Query movies by title
+Movies --> System: List of matching movies
+System --> User: List of matching movies
+
+User -> System: Select movie
+System -> Movies: Get movie details and showtimes
+Movies --> System: Movie details and showtimes
+System --> User: Movie details and showtimes
+
+User -> System: Select showtime
+System -> Movies: Check seat availability
+Movies --> System: Available seats
+System --> User: Available seats
+
+User -> System: Choose seats
+System -> Movies: Reserve seats
+Movies --> System: Reservation confirmation
+System --> User: Reservation confirmation
+
+User -> System: Proceed to checkout
+System -> System: Calculate total price
+System -> User: Total price
+
+User -> System: Complete payment
+System -> Movies: Update reservation status
+Movies --> System: Updated reservation status
+System --> User: Confirmation message
+
+===Administrator===
+Administrator -> System: Login to the system
+System -> Movies: Add movie details and showtimes
+Movies -> System: Show new added movie and showtime
+
+System -> Movies: Update movie details and showtimes
+Movies -> System: Show updated movie and showtimes details
+
+System -> Movies: Delete movie and showtime details
+Movies -> System: Return the updated list
+@enduml

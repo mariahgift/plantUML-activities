@@ -1,0 +1,56 @@
+@startuml
+title Book Store \n Sequence Diagram
+
+skinparam SequenceMessageAlignment center
+skinparam lifelineStrategy nosolid
+
+actor Administrator #red
+actor User #blue
+participant Cart
+database Books
+participant Purchase
+participant Gateway
+
+
+====Get all books====
+User -> Books: Get books details
+Books -> User: Show book details 
+
+User -> Books: Get book detail based on the id
+Books -> User: Book [id] detail
+
+====Add book to cart====
+User -> Cart: Add selected book in the cart
+Cart -> Books: Get the book id from books
+Books -> Cart: Show the selected book in the cart
+Cart -> User: Show the selected book to the user
+
+====Increase book quantity====
+User -> Cart: Add quantity and update the quantity to the selected book in the cart
+Cart -> User: Show the updated book details in to the user
+
+====Remove book to cart====
+User -> Cart: Delete the book based on the book id in the cart
+Cart -> User: Show to the user that the book is deleted in the cart
+
+====Payment====
+User -> Cart: Check the books added to cart 
+Cart -> Purchase: Proceed to payment 
+Purchase -> Gateway: Pay the ordered books
+Gateway -> Purchase: Successfully paid the books
+
+
+==== Add book in list ====
+Administrator -> Books: Add new book in the list
+Books -> Administrator: Show to the admin that the book has been added
+
+==== Update book details in list (Administrator)====
+Administrator -> Books: Get the book details of selected book id
+Books -> Administrator: Show to the administrator the book details
+Administrator -> Books: Update books details of the selected book
+Books -> Administrator: Show the updated books details
+
+==== Delete book in list (Administrator)====
+Administrator -> Books: Delete the book details based on selected book
+Books -> Administrator: Show that the books has been deleted
+@enduml
