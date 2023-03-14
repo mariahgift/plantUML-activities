@@ -38,12 +38,16 @@ System --> User: Confirmation message
 
 ===Administrator===
 Administrator -> System: Login to the system
+
+==== add movies and showtimes====
 System -> Movies: Add movie details and showtimes
 Movies -> System: Show new added movie and showtime
 
+==== update movies and showtimes====
 System -> Movies: Update movie details and showtimes
 Movies -> System: Show updated movie and showtimes details
 
+==== delete movies and showtimes====
 System -> Movies: Delete movie and showtime details
 Movies -> System: Return the updated list
 @enduml
